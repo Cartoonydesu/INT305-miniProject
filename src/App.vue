@@ -1,13 +1,15 @@
 <script>
-    import ListMenu from './components/ListMenu.vue'
-    import Order from './view/Order.vue'
+    // import Order from './view/Order.vue'
+    import { RouterLink, RouterView } from 'vue-router'
 
-    export default {
-        components: {
-            ListMenu,
-            Order
-        },
-    }
+    // export default {
+    //     components: {
+    //         ListMenu,
+    //         Order
+    //     },
+    // }
+
+    const a = "hello"
 
 
 </script>
@@ -15,18 +17,16 @@
 
 <template>
 
-    const a = "hello"
 
-    <div class="navbar">Navbar</div>
-
-    <!-- <navbar> hello </navbar> -->
-
-    <!-- <h1>App.vue</h1> -->
-
+    <!-- <div class="mainmenu"> -->
+        <router-link class="router" :to="{name: 'menu'}">List menu</router-link>  
+        <router-link class="router" :to="{name: 'set-menu'}">List set menu</router-link>
+    <!-- </div> -->
+        <!-- <RouterLink to="{name: 'menu'}">Hello</RouterLink> -->
+        <!-- <Order /> -->
+    <br>
     <div>
-        <p>App: ListMenu</p>
-        <ListMenu :test="a" />
-        <Order />
+        <RouterView />
     </div>
 
 </template>
@@ -40,7 +40,22 @@
     /* navbar {
         background-color: aqua;
     } */
+    .mainmenu {
+        font-size: x-large;
+    }
 
+    div{
+        margin: 1em
+    }
+
+    .router{
+        font-size: x-large;
+        margin-right: 5em;
+        /* padding: 0.5em;
+        background-color: #5bb450;
+        border-radius: 20px;
+        color: white; */
+    }
 
     /* .navbar p {
     float: right;
