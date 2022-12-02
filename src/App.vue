@@ -1,47 +1,58 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script>
+    import ListMenu from './components/ListMenu.vue'
+    import Order from './view/Order.vue'
+
+    export default {
+        components: {
+            ListMenu,
+            Order
+        },
+    }
+
+
 </script>
 
+
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    const a = "hello"
+
+    <div class="navbar">Navbar</div>
+
+    <!-- <navbar> hello </navbar> -->
+
+    <!-- <h1>App.vue</h1> -->
+
+    <div>
+        <p>App: ListMenu</p>
+        <ListMenu :test="a" />
+        <Order />
     </div>
-  </header>
 
-  <main>
-    <TheWelcome />
-  </main>
 </template>
 
+
 <style scoped>
-header {
-  line-height: 1.5;
-}
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    /* navbar {
+        background-color: aqua;
+    } */
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
+    /* .navbar p {
+    float: right;
+    display: block;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 30px;
+    text-decoration: none;
+    margin: 0;
+    font-size: 18px;
+} */
 </style>
+
+
+
