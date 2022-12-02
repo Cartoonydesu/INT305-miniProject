@@ -15,7 +15,7 @@
     async function getAllMenus(){
         console.log("getAllMenu")
         const foodQry = query(foodRef)
-        const foodQuerySnap = await getDocs(foodQry, orderBy("type"));
+        // const foodQuerySnap = await getDocs(foodQry, orderBy("type"));
         onSnapshot(foodQry, async () => {
             foods.value = []
             const foodQuerySnap = await getDocs(foodQry);
