@@ -3,6 +3,7 @@ import { collection, getDocs, onSnapshot, query } from '@firebase/firestore';
 import { ref } from 'vue';
 import { onMounted } from 'vue';
 import db from '../firebase/init';
+import ListSetMenu from '../components/ListSetMenu.vue'
 
     const setMenus = ref([])
     const setRef = collection(db, "setMenus")
@@ -31,8 +32,8 @@ import db from '../firebase/init';
 
 <template>
     <h1>Set menu :</h1>
-    <div class="box">
-
+    <div class="box" v-for="setMenu in setMenus" :key="setMenu.id">
+        <ListSetMenu :setMenu="setMenu"/>
     </div>
 
 </template>
