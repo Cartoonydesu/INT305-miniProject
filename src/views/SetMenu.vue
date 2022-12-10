@@ -28,10 +28,16 @@ import ListSetMenu from '../components/ListSetMenu.vue'
         getAllSetMenus()
     })
 
+
 </script>
 
 <template>
     <h1>Set menu :</h1>
+    <br/>
+    <h4>Filter by :</h4>
+    <!-- <input type="radio" id="foodType"/>
+    <label for="foodType">Burger only</label> -->
+
     <div class="box" v-for="setMenu in setMenus" :key="setMenu.id">
         <ListSetMenu :setMenu="setMenu"/>
     </div>

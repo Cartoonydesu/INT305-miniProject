@@ -17,7 +17,6 @@
 
 <template>
 
-
     <div class="mainmenu">
         <router-link class="router" :to="{name: 'menu'}">List menu</router-link>  <br/>
         <router-link class="router" :to="{name: 'set-menu'}">List set menu</router-link>
@@ -25,9 +24,9 @@
         <!-- <RouterLink to="{name: 'menu'}">Hello</RouterLink> -->
         <!-- <Order /> -->
     <br>
-    <div>
+    <!-- <div> -->
         <RouterView />
-    </div>
+    <!-- </div> -->
 
 </template>
 
