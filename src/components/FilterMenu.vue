@@ -26,7 +26,8 @@
 <style scoped>
 
     input {
-        margin: 0.5em;
+        margin-right: 0.5em;
+        margin-bottom: 1em;
         font-size: large;
     }
 
