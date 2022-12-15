@@ -9,8 +9,12 @@
     const orderRef = collection(db, "orders")
     const filterMode = ref("")
     const filterCompleted = ref("all")
+    const startTime = ref()
+    const endTime = ref()
+    const timeError = ref(false)
 
     async function getAllOrders(){
+        timeError.value = false
         let orderQuery = query(orderRef, orderBy("paidTime", "desc"), limit(currentLimit.value))
         if(filterMode.value=='completedStatus' && filterCompleted.value!='all'){
             if(filterCompleted.value=='completed'){
@@ -19,6 +23,13 @@
             else if(filterCompleted.value=='failed'){
                 orderQuery = query(orderRef, where("completed", "==", false), orderBy("paidTime", "desc"), limit(currentLimit.value))
             }
+        } else if(filterMode.value=='timestampFilter' && startTime!=null && endTime !=null){
+            if(startTime.value>endTime.value){
+                timeError.value = true
+                return
+            }
+            // orderQuery = query(orderRef, where("paidTime", ">=", new Date(startTime.value)))
+            orderQuery = query(orderRef, where("paidTime", ">=", new Date(startTime.value)), where("paidTime", "<=", new Date(endTime.value)))
         }
         onSnapshot(orderRef, async() => {
             orders.value = []
@@ -50,6 +61,7 @@
 
     <div class="limit">
         <span>Adjust showing limit for the data </span> <input type="number" v-model="currentLimit" class="inputNumber" @click="getAllOrders()"/>
+        <button @click="getAllOrders()">Adjust</button>
     </div>
 
     <br/>
@@ -59,7 +71,7 @@
         <label for="completedStatus">Filter by completed status</label>
         <br/>
         <div v-if="filterMode=='completedStatus'" style="margin-left:2em;">
-            <input type="radio" name="completed" id="all" value="all" v-model="filterCompleted" @click="getAllOrders(), filterCompleted='all'"/>
+            <input type="radio" name="completed" id="all" value="all" v-model="filterCompleted" @click="filterCompleted='all', getAllOrders() "/>
             <label for="all">All</label>
             <input type="radio" name="completed" id="completed" value="completed" v-model="filterCompleted" @click="filterCompleted='completed', getAllOrders()"/>
             <label for="completed">Completed</label>
@@ -67,6 +79,15 @@
             <label for="failed">Failed</label>
         </div>
 
+        <input type="radio" name="filterMode" id="timestampFilter" value="timestampFilter" v-model="filterMode"/>
+        <label for="timestampFilter">Filter by timestamp</label>
+        <div v-if="filterMode=='timestampFilter'" style="margin-left:2em;">
+            <span>Start from </span>
+            <input type="datetime-local" v-model="startTime" class="inputTime"/>
+            <span> to </span>
+            <input type="datetime-local" v-model="endTime" class="inputTime"/>
+            <button @click="getAllOrders()">Search</button>
+        </div>
 
     </div>
 
@@ -121,5 +142,12 @@
         width: 3em;
     }
 
+    .inputTime{
+        border-color:  hsla(160, 100%, 37%, 1);
+        background-color: rgb(218, 244, 235);;
+        border-radius: 5px;
+        width: 14em;
+        margin: 0 1em 0 1em;
+    }
 
 </style>
